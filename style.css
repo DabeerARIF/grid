@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-1: #111827;
+    --bg-2: #1f2937;
+    --card: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.12);
+    --shadow: rgba(15, 23, 42, 0.45);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: radial-gradient(circle at top, #1d2433 0%, var(--bg-1) 35%, var(--bg-2) 100%);
+    font-family: Arial, sans-serif;
+    padding: 32px 0;
+}
+
+.gallery {
+    width: min(1200px, calc(100% - 32px));
+    column-count: 4;
+    column-gap: 18px;
+}
+
+.gallery-item {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 18px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 16px 32px var(--shadow);
+    break-inside: avoid;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-item:nth-child(odd) {
+    transform: translateY(18px);
+}
+
+.gallery-item:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.55);
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--ratio, 1 / 1.1);
+    object-fit: cover;
+    filter: saturate(1.08) contrast(1.02);
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.16) contrast(1.05);
+}
+
+.item1 { --ratio: 4 / 5; }
+.item2 { --ratio: 3 / 4; }
+.item3 { --ratio: 5 / 4; }
+.item4 { --ratio: 4 / 6; }
+.item5 { --ratio: 1 / 1.2; }
+.item6 { --ratio: 4 / 5; }
+.item7 { --ratio: 3 / 4; }
+.item8 { --ratio: 5 / 6; }
+.item9 { --ratio: 1 / 1.3; }
+
+@media (max-width: 900px) {
+    .gallery {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 640px) {
+    .gallery {
+        column-count: 2;
+    }
+
+    .gallery-item {
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 420px) {
+    body {
+        padding-top: 18px;
+    }
+
+    .gallery {
+        column-count: 1;
+    }
+}
